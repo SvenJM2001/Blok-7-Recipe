@@ -39,8 +39,8 @@ if (isset($_SESSION['gebruikersnaam'])) {
                     <li class="dropdown">
                         <a href="#">ingredienten</a>
                         <div class="dropdown-content">
-                            <a href="ingrediënten_index.php">Bekijken</a>
-                            <a href="ingrediënten_add.php">Toevoegen</a>
+                            <a href="ingredienten_index.php">Bekijken</a>
+                            <a href="ingredienten_add.php">Toevoegen</a>
                         </div>
                     </li>
 
