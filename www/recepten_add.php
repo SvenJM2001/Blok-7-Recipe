@@ -3,10 +3,15 @@ require 'database.php';
 session_start();
 
 // Haal de types op uit de type-tabel
-$query = "SELECT type FROM maaltijdtypes";
-$stmt = $conn->prepare($query);
-$stmt->execute();
-$types = $stmt->fetchAll(PDO::FETCH_ASSOC);
+$query1 = "SELECT type FROM maaltijdtypes";
+$stmt1 = $conn->prepare($query1);
+$stmt1->execute();
+$types = $stmt1->fetchAll(PDO::FETCH_ASSOC);
+
+$query2 = "SELECT naam FROM ingredienten";
+$stmt2 = $conn->prepare($query2);
+$stmt2->execute();
+$ingredienten = $stmt2->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
 <!DOCTYPE html>
@@ -36,14 +41,15 @@ $types = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 </select>
             </div>
             <div>
-                <label for="tijd">Zeldzaamheid:</label>
-                <select name="tijd" id="tijd">
-                    <option value="common">common</option>
-                    <option value="uncommon">uncommon</option>
-                    <option value="rare">rare</option>
-                    <option value="epic">epic</option>
-                    <option value="legendary">legendary</option>
-                </select>
+                <fieldset>
+                    <legend>Ingrediënten</legend>
+                    <?php foreach ($ingredienten as $ingredient): ?>
+                        <input type="checkbox" id="<?php echo $ingredient['naam']; ?>" 
+                            name="ingredienten[]" 
+                            value="<?php echo $ingredient['naam']; ?>">
+                        <label for="<?php echo $ingredient['naam']; ?>"><?php echo $ingredient['naam']; ?></label> <br>
+                    <?php endforeach; ?>
+                </fieldset>
             </div>
             <div>
                 <label for="beschrijving">Beschrijving:</label>
@@ -51,8 +57,20 @@ $types = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
             </div>
             <div>
-                <label for="price">Prijs:</label>
-                <input type="number" name="price" id="price">
+                <label for="stappenplan">Stappelplan:</label>
+                <input type="text" name="stappenplan" id="stappenplan">
+            </div>
+            <div>
+                <label for="tijd">Tijdsduur:</label>
+                <input type="time" name="tijd" id="tijd">
+            </div>
+            <div>
+                <label for="graad">Moeilijkheidsgraad:</label>
+                <select name="graad" id="graad">
+                        <option value="Makkelijk">Makkelijk</option>
+                        <option value="Gemiddeld">Gemiddeld</option>
+                        <option value="Moeilijk">Moeilijk</option>
+                </select>
             </div>
             <div>
                 <label for="image">Afbeelding:</label>

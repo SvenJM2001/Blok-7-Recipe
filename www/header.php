@@ -23,10 +23,8 @@ if (isset($_SESSION['gebruikersnaam'])) {
 <header>
     <nav>
         <div>
-            <div>Recepten</a></div>
+            <div><a href="index.php">Recepten</a></div>
             <ul>
-                <li><a href="#">Mijn Verzameling</a></li>
-                <li><a href="#">Zeldzame Pokémon</a></li>
                 <?php if ($rol === 'beheerder') { ?>
                     <!-- Dropdown Gebruikers -->
                     <li class="dropdown">
@@ -37,26 +35,17 @@ if (isset($_SESSION['gebruikersnaam'])) {
                         </div>
                     </li>
 
-                    <!-- Dropdown Kaarten -->
+                    <!-- Dropdown ingrediënten -->
                     <li class="dropdown">
-                        <a href="#">Kaarten</a>
+                        <a href="#">ingredienten</a>
                         <div class="dropdown-content">
-                            <a href="pokemon_index.php">Bekijken</a>
-                            <a href="pokemon_add.php">Toevoegen</a>
+                            <a href="ingrediënten_index.php">Bekijken</a>
+                            <a href="ingrediënten_add.php">Toevoegen</a>
                         </div>
                     </li>
 
-                    <!-- Dropdown Types -->
-                    <li class="dropdown">
-                        <a href="#">Types</a>
-                        <div class="dropdown-content">
-                            <a href="types_index.php">Bekijken</a>
-                            <a href="types_add.php">Toevoegen</a>
-                        </div>
-                    </li>
+
                 <?php } ?>
-                <li><a href="#">Over Ons</a></li>
-                <li><a href="#">Contact</a></li>
                 <div class="dropdown">
                     <button class="dropdown_button">
                         <?php
@@ -73,6 +62,7 @@ if (isset($_SESSION['gebruikersnaam'])) {
                     </button>
                     <ul class="dropdown-content">
                         <li><a href="#">Mijn gegevens</a></li>
+                        <li><a href="">Favorieten</a></li>
                         <?php
                         if(isset($_SESSION['gebruikersnaam'])){
                         ?>
