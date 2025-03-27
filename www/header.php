@@ -21,12 +21,13 @@ if (isset($_SESSION['gebruikersnaam'])) {
 }
 ?>
 <header>
-    <nav>
-        <div>
-            <div><a href="index.php">Recepten</a></div>
-            <ul>
+    <nav class="navbar">
+        <div class="navbar-content">
+            <div class="logo">
+                <a href="index.php">Recepten</a>
+            </div>
+            <ul class="nav-links">
                 <?php if ($rol === 'beheerder') { ?>
-                    <!-- Dropdown Gebruikers -->
                     <li class="dropdown">
                         <a href="#">Recepten</a>
                         <div class="dropdown-content">
@@ -35,47 +36,44 @@ if (isset($_SESSION['gebruikersnaam'])) {
                         </div>
                     </li>
 
-                    <!-- Dropdown ingrediënten -->
                     <li class="dropdown">
-                        <a href="#">ingredienten</a>
+                        <a href="#">Ingredienten</a>
                         <div class="dropdown-content">
                             <a href="ingredienten_index.php">Bekijken</a>
                             <a href="ingredienten_add.php">Toevoegen</a>
                         </div>
                     </li>
-
-
                 <?php } ?>
-                <div class="dropdown">
+                <li class="dropdown">
                     <button class="dropdown_button">
                         <?php
-                        if(isset($_SESSION['gebruikersnaam'])){
+                        if (isset($_SESSION['gebruikersnaam'])) {
                         ?>
-                        <a href="#"><?php echo $_SESSION['gebruikersnaam'] ?></a>
+                            <a href="#"><?php echo $_SESSION['gebruikersnaam']; ?></a>
                         <?php
                         } else {
                         ?>
-                        <a href="login.php">Inloggen</a>
+                            <a href="login.php">Inloggen</a>
                         <?php   
                         }
                         ?>
                     </button>
                     <ul class="dropdown-content">
                         <li><a href="#">Mijn gegevens</a></li>
-                        <li><a href="">Favorieten</a></li>
+                        <li><a href="#">Favorieten</a></li>
                         <?php
-                        if(isset($_SESSION['gebruikersnaam'])){
+                        if (isset($_SESSION['gebruikersnaam'])) {
                         ?>
-                        <li><a href="loguit.php">Uitloggen</a></li>
+                            <li><a href="loguit.php">Uitloggen</a></li>
                         <?php
                         } else {
                         ?>
-                        <li><button id="login_button" onclick="window.location.href = 'login.php';">Login</button></li>
+                            <li><button id="login_button" onclick="window.location.href = 'login.php';">Login</button></li>
                         <?php
                         }
                         ?>
                     </ul>
-                </div>
+                </li>
             </ul>
         </div>
     </nav>

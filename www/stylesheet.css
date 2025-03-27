@@ -1,0 +1,262 @@
+/* Algemene header stijlen */
+header {
+    background-color: #333;
+    color: white;
+    padding: 15px 0;
+}
+
+.navbar {
+    width: 80%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.navbar-content {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.logo {
+    margin-right: auto;
+}
+
+.logo a {
+    font-size: 24px;
+    font-weight: bold;
+    color: white;
+    text-decoration: none;
+    padding: 10px;
+}
+
+.nav-links {
+    display: flex;
+    gap: 20px;
+    list-style-type: none;
+    padding: 0;
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    padding: 10px;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+.nav-links a:hover {
+    background-color: #555;
+    border-radius: 4px;
+}
+
+/* Dropdown-stijlen */
+.dropdown {
+    position: relative;
+    align-content: center;
+}
+
+.dropdown_button {
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+    font-size: 16px;
+    padding: 10px;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #333;
+    min-width: 160px;
+    z-index: 1;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+    border-radius: 4px;
+    right: 0;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown-content a {
+    color: white;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover {
+    background-color: #555;
+}
+
+/* Stijlen voor de login en uitlogknoppen */
+#login_button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+#login_button:hover {
+    background-color: #45a049;
+}
+
+/* Responsive stijlen */
+@media (max-width: 768px) {
+    .navbar {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .nav-links {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .logo a {
+        font-size: 20px;
+        padding: 0;
+    }
+
+    .dropdown-content {
+        right: unset;
+    }
+}
+
+
+/* Algemene stijlen */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f9;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    width: 80%;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Hero Sectie */
+.hero {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.hero-title {
+    font-size: 36px;
+    font-weight: bold;
+}
+
+.hero-text {
+    font-size: 18px;
+    color: #666;
+}
+
+/* Filters */
+.filters {
+    background-color: #fff;
+    padding: 20px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    border-radius: 8px;
+}
+
+.filter-form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.filter-input, .filter-select, .filter-button {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.filter-input {
+    width: 100%;
+    max-width: 250px;
+}
+
+.filter-select {
+    width: auto;
+    max-width: 200px;
+}
+
+.filter-button {
+    background-color: #4CAF50;
+    color: white;
+    cursor: pointer;
+    border: none;
+    border-radius: 4px;
+}
+
+.filter-button:hover {
+    background-color: #45a049;
+}
+
+/* Recepten Grid */
+.recipe-title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.recipes-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+}
+
+.recipe-card {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+.recipe-img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.recipe-info {
+    padding: 15px;
+}
+
+.recipe-name {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.recipe-details {
+    font-size: 14px;
+    color: #555;
+}
+
+.recipe-link {
+    display: inline-block;
+    margin-top: 10px;
+    color: #4CAF50;
+    text-decoration: none;
+}
+
+.recipe-link:hover {
+    text-decoration: underline;
+}
+
+.no-recipes {
+    text-align: center;
+    font-size: 18px;
+    color: #666;
+}
