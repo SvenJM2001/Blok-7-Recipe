@@ -45,6 +45,15 @@ try {
         $query .= " WHERE " . implode(" AND ", $conditions);
     }
 
+    if (!empty($_GET['sorteer'])) {
+        if ($_GET['sorteer'] == "kort-lang") {
+            $query .= " ORDER BY recepten.bereidingstijd ASC";
+        } elseif ($_GET['sorteer'] == "lang-kort") {
+            $query .= " ORDER BY recepten.bereidingstijd DESC";
+        }
+    }
+    
+
     $stmt = $conn->prepare($query);
     $stmt->execute($params);
     $recepten = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -99,9 +108,20 @@ try {
                     <?php endforeach; ?>
                 </select>
 
+                <!-- Resultaten weergeven -->
+                <p class="result-count"><?php echo count($recepten); ?> recepten gevonden</p>
+
+                <!-- Sorteeroptie: Bereidingstijd -->
+                <select name="sorteer" class="filter-select">
+                    <option value="">Sorteer op bereidingstijd</option>
+                    <option value="kort-lang" <?php echo (isset($_GET['sorteer']) && $_GET['sorteer'] == "kort-lang") ? 'selected' : ''; ?>>Kort → Lang</option>
+                    <option value="lang-kort" <?php echo (isset($_GET['sorteer']) && $_GET['sorteer'] == "lang-kort") ? 'selected' : ''; ?>>Lang → Kort</option>
+                </select>
+
                 <button type="submit" class="filter-button">Filter</button>
             </form>
         </div>
+
 
         <!-- Recepten Grid -->
         <h2 class="recipe-title">Kies een lekker recept</h2>

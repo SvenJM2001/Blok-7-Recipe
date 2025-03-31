@@ -13,78 +13,75 @@ $landen = $stmt->fetchAll(PDO::FETCH_ASSOC);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Card Create</title>
+    <title>Registreren</title>
     <link rel="stylesheet" href="stylesheet.css">
 </head>
 <body>
     <?php include 'header.php';?>
 
-    <form action="register_process.php" method="post" enctype="multipart/form-data">
-        <div>
-            <h2></h2>
-            <div>
+    <div class="login-container">
+        <h2>Registreren</h2>
+        <form action="register_process.php" method="post" enctype="multipart/form-data">
+            <div class="form-group">
                 <label for="voornaam">Voornaam:</label>
                 <input type="text" name="voornaam" id="voornaam" required>
             </div>
-            <div>
+            <div class="form-group">
                 <label for="tussenvoegsel">Tussenvoegsel:</label>
-                <input type="text" name="tussenvoegsel" id="tussenvoegsel" required>
+                <input type="text" name="tussenvoegsel" id="tussenvoegsel">
             </div>
-            <div>
+            <div class="form-group">
                 <label for="achternaam">Achternaam:</label>
                 <input type="text" name="achternaam" id="achternaam" required>
             </div>
-            <div>
+            <div class="form-group">
                 <label for="email">Email:</label>
                 <input type="email" name="email" id="email" required>
             </div>
-            <div>
+            <div class="form-group">
                 <label for="gebruikersnaam">Gebruikersnaam:</label>
                 <input type="text" name="gebruikersnaam" id="gebruikersnaam" required>
             </div>
-            <div>
+            <div class="form-group">
                 <label for="wachtwoord">Wachtwoord:</label>
                 <input type="password" name="wachtwoord" id="wachtwoord" required>
             </div>
-            <div>
+            <div class="form-group">
                 <label for="rol">Rol:</label>
                 <select name="rol" id="rol">
                     <option value="bezoeker">Bezoeker</option>
-                    <option value="beheerder">beheerder</option>
+                    <option value="beheerder">Beheerder</option>
                 </select>
             </div>
-        </div>
-        <div>
             <h2>Adres</h2>
-            <div>
+            <div class="form-group">
                 <label for="land">Land:</label>
                 <select name="land" id="land">
                 <?php foreach ($landen as $land): ?>
-                    <option value="<?php echo $land['landnaam']; ?>" <?php echo isset($_GET['landnaam']) && $_GET['landnaam'] == $land['landnaam'] ? 'selected' : ''; ?>>
+                    <option value="<?php echo $land['landnaam']; ?>">
                         <?php echo ucfirst($land['landnaam']); ?>
                     </option>
                 <?php endforeach; ?>
                 </select>
             </div>
-            <div>
+            <div class="form-group">
                 <label for="plaats">Plaats:</label>
                 <input type="text" name="plaats" id="plaats">
             </div>
-            <div>
+            <div class="form-group">
                 <label for="straat">Straat:</label>
                 <input type="text" name="straat" id="straat">
             </div>
-            <div>
+            <div class="form-group">
                 <label for="huisnummer">Huisnummer:</label>
                 <input type="number" name="huisnummer" id="huisnummer">
             </div>
-            <div>
+            <div class="form-group">
                 <label for="postcode">Postcode:</label>
                 <input type="text" name="postcode" id="postcode">
             </div>
-        </div>
-        <button type="submit">register</button>
-    </form>
-    
+            <button type="submit" class="btn">Register</button>
+        </form>
+    </div>
 </body>
 </html>
