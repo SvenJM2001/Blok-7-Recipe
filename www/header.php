@@ -60,7 +60,7 @@ if (isset($_SESSION['gebruikersnaam'])) {
                     </button>
                     <ul class="dropdown-content">
                         <li><a href="#">Mijn gegevens</a></li>
-                        <li><a href="#">Favorieten</a></li>
+                        <li><a href="favorieten_index.php">Favorieten</a></li>
                         <?php
                         if (isset($_SESSION['gebruikersnaam'])) {
                         ?>
