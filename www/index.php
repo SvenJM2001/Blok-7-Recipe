@@ -118,7 +118,7 @@ try {
                             <p class="recipe-details">Bereidingstijd: <?php echo htmlspecialchars($recept['bereidingstijd']); ?> minuten</p>
                             <p class="recipe-details">Moeilijkheid: <?php echo htmlspecialchars($recept['moeilijkheidsgraad']); ?></p>
                             <p class="recipe-details">Type: <?php echo htmlspecialchars($recept['maaltijdtype']); ?></p>
-                            <a href="recept_detail.php?id=<?php echo $recept['recept_code']; ?>" class="recipe-link">Meer informatie →</a>
+                            <a href="recepten_detail.php?id=<?php echo $recept['recept_code']; ?>" class="recipe-link">Meer informatie →</a>
                         </div>
                     </div>
                 <?php endforeach; ?>

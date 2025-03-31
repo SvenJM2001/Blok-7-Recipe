@@ -107,35 +107,108 @@ header {
     background-color: #45a049;
 }
 
-/* Responsive stijlen */
-@media (max-width: 768px) {
-    .navbar {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-
-    .nav-links {
-        flex-direction: column;
-        gap: 10px;
-    }
-
-    .logo a {
-        font-size: 20px;
-        padding: 0;
-    }
-
-    .dropdown-content {
-        right: unset;
-    }
-}
-
-
 /* Algemene stijlen */
 body {
     font-family: Arial, sans-serif;
     background-color: #f4f4f9;
     margin: 0;
     padding: 0;
+}
+
+/* Algemene stijlen voor de recepten index pagina */
+main {
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 20px;
+}
+
+/* Zoek- en filtersectie */
+.recept_search {
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+.recept_search input,
+.recept_search select,
+.recept_search button {
+    padding: 10px;
+    margin: 10px 0;
+    width: 100%;
+    max-width: 300px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.recept_search button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.recept_search button:hover {
+    background-color: #45a049;
+}
+
+/* Recepten tabel */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+table, th, td {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    text-align: left;
+}
+
+th {
+    background-color: #f2f2f2;
+    padding: 12px;
+    font-weight: bold;
+}
+
+td {
+    padding: 12px;
+}
+
+tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+tr:hover {
+    background-color: #f1f1f1;
+}
+
+/* Recepten afbeeldingen in de tabel */
+td img {
+    border-radius: 8px;
+    max-width: 100px;
+    height: auto;
+}
+
+/* Acties in de tabel */
+td a {
+    color: #4CAF50;
+    text-decoration: none;
+    padding: 5px 10px;
+    border: 1px solid #4CAF50;
+    border-radius: 5px;
+    margin-right: 5px;
+}
+
+td a:hover {
+    background-color: #45a049;
+    color: white;
+}
+
+td a:active {
+    background-color: #0056b3;
+    border-color: #0056b3;
 }
 
 .container {
@@ -259,4 +332,312 @@ body {
     text-align: center;
     font-size: 18px;
     color: #666;
+}
+
+/* Recept detail pagina */
+.recipe-detail {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    margin-top: 20px;
+}
+
+/* Titel van het recept */
+.recipe-detail h1 {
+    font-size: 32px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+/* Afbeelding van het recept */
+.recipe-img {
+    width: 100%;
+    max-height: 500px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+/* Recept meta-informatie (maaltijdtype, moeilijkheidsgraad, bereidingstijd) */
+.recipe-meta {
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+.recipe-meta p {
+    font-size: 16px;
+    margin: 5px 0;
+}
+
+/* Beschrijving en stappenplan */
+.recipe-detail h2 {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+    margin-top: 30px;
+}
+
+.recipe-detail p {
+    font-size: 16px;
+    color: #555;
+    line-height: 1.6;
+}
+
+/* Ingrediënten lijst */
+.recipe-detail ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.recipe-detail ul li {
+    font-size: 16px;
+    margin: 5px 0;
+    color: #555;
+}
+
+/* Beoordeling sectie */
+.rating {
+    font-size: 18px;
+    margin-bottom: 20px;
+}
+
+.rating span {
+    font-size: 16px;
+    color: #666;
+}
+
+/* Actieknoppen voor favorieten en reviews */
+.recipe-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.favorite-btn, .review-btn {
+    padding: 12px 20px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.favorite-btn {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.favorite-btn:hover {
+    background-color: #45a049;
+}
+
+.review-btn {
+    background-color: #007bff;
+    color: white;
+}
+
+.review-btn:hover {
+    background-color: #0056b3;
+}
+
+/* Als je nog niet bent ingelogd */
+.recipe-actions p {
+    font-size: 16px;
+    color: #888;
+}
+
+/* Stijlen voor de review pagina */
+.review-form {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.review-form h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.review-form .form-group {
+    margin-bottom: 15px;
+}
+
+.review-form label {
+    font-weight: bold;
+}
+
+.review-form select,
+.review-form textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.review-form button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.review-form button:hover {
+    background-color: #45a049;
+}
+
+/* Algemene stijlen voor de review sectie */
+.reviews-section {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    margin-top: 40px;
+}
+
+.reviews-section h2 {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.review {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 20px;
+    transition: background-color 0.3s ease;
+}
+
+.review:hover {
+    background-color: #f1f1f1;
+}
+
+.review-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.review-header strong {
+    font-size: 18px;
+    color: #333;
+}
+
+.review-header span {
+    font-size: 16px;
+    color: #666;
+}
+
+.review-rating {
+    display: flex;
+    align-items: center;
+    margin-top: 5px;
+}
+
+.review-rating span {
+    margin-right: 5px;
+    font-size: 16px;
+    color: #f39c12;
+}
+
+.review-rating .empty-star {
+    color: #ccc;
+}
+
+.review p {
+    font-size: 16px;
+    color: #555;
+    line-height: 1.6;
+    margin-top: 10px;
+}
+
+/* Stijl voor de beoordelingsterren */
+.star {
+    color: #f39c12;
+}
+
+.star-half {
+    color: #f39c12;
+}
+
+.star-empty {
+    color: #ccc;
+}
+
+
+/* Responsive stijlen */
+@media (max-width: 768px) {
+    .navbar {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .nav-links {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .logo a {
+        font-size: 20px;
+        padding: 0;
+    }
+
+    .dropdown-content {
+        right: unset;
+    }
+    
+    .recept_search {
+        padding: 15px;
+    }
+
+    .recept_search input,
+    .recept_search select,
+    .recept_search button {
+        max-width: 100%;
+    }
+
+    table {
+        font-size: 14px;
+    }
+
+    td img {
+        max-width: 80px;
+    }
+    .recipe-detail {
+        padding: 20px;
+    }
+
+    .recipe-detail h1 {
+        font-size: 28px;
+    }
+
+    .recipe-detail h2 {
+        font-size: 20px;
+    }
+
+    .recipe-meta {
+        padding: 15px;
+    }
+
+    .recipe-actions {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .favorite-btn, .review-btn {
+        width: 100%;
+        text-align: center;
+    }
 }

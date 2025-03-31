@@ -95,9 +95,9 @@ $recepten = $stmt->fetchAll(PDO::FETCH_ASSOC);
                                 <img src="./uploads/<?php echo htmlspecialchars($recept['afbeelding']); ?>" alt="<?php echo htmlspecialchars($recept['naam']); ?>" style="width: 100px;">
                             </td>
                             <td>
-                                <a href="recept_detail.php?id=<?php echo $recept['recept_code']; ?>">Bekijk</a>
-                                <a href="recept_edit.php?id=<?php echo $recept['recept_code']; ?>">Wijzig</a>
-                                <a href="recept_delete.php?id=<?php echo $recept['recept_code']; ?>">Verwijder</a>
+                                <a href="recepten_detail.php?id=<?php echo $recept['recept_code']; ?>">Bekijk</a>
+                                <a href="recepten_edit.php?id=<?php echo $recept['recept_code']; ?>">Wijzig</a>
+                                <a href="recepten_delete.php?id=<?php echo $recept['recept_code']; ?>">Verwijder</a>
                             </td>
                         </tr>
                     <?php endforeach; ?>
