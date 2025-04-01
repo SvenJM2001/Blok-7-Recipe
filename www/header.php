@@ -43,6 +43,8 @@ if (isset($_SESSION['gebruikersnaam'])) {
                             <a href="ingredienten_add.php">Toevoegen</a>
                         </div>
                     </li>
+                    
+                    <li><a href="gebruikers_index.php">Beheer Gebruikers</a></li>
                 <?php } ?>
                 <li class="dropdown">
                     <button class="dropdown_button">
