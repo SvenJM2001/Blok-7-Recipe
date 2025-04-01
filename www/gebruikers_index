@@ -13,8 +13,8 @@ $stmt->execute();
 $types = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 // Haal de recepten op met type-informatie
-$sql = "SELECT recepten.*, maaltijdtypes.type AS type_name FROM recepten
-        LEFT JOIN maaltijdtypes ON recepten.type_id = maaltijdtypes.type_id"; 
+$sql = "SELECT gebruikers.*, bezoekers.* FROM gebruikers
+        LEFT JOIN bezoekers ON gebruikers.gebruiker_id = bezoekers.g_id"; 
 
 // Voeg filters toe aan de query als ze zijn ingesteld
 $conditions = [];

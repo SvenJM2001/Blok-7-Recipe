@@ -38,5 +38,6 @@ $types = $stmt->fetchAll(PDO::FETCH_ASSOC);
         </form>
     
     </main>
+    <script src="script.js"></script>
 </body>
 </html>

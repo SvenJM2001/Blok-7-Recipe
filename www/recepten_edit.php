@@ -111,5 +111,6 @@ $huidigeIngredientenArray = array_map(function($ingredient) {
             </form>
         </div>
     </main>
+    <script src="script.js"></script>
 </body>
 </html>

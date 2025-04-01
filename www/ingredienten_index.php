@@ -96,5 +96,6 @@ $ingredienten = $stmt->fetchAll(PDO::FETCH_ASSOC);
             </table>
         </div>
     </main>
+    <script src="script.js"></script>
 </body>
 </html>

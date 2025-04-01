@@ -25,6 +25,6 @@
         </form>
         <p>Heb je nog geen account? <a href="register.php">Registreer hier</a></p>
     </div>
-
+    <script src="script.js"></script>
 </body>
 </html>

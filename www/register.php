@@ -83,5 +83,6 @@ $landen = $stmt->fetchAll(PDO::FETCH_ASSOC);
             <button type="submit" class="btn">Register</button>
         </form>
     </div>
+    <script src="script.js"></script>
 </body>
 </html>

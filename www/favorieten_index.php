@@ -120,5 +120,6 @@ try {
             <p>Je hebt nog geen favorieten toegevoegd.</p>
         <?php endif; ?>
     </main>
+    <script src="script.js"></script>
 </body>
 </html>

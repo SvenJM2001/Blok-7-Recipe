@@ -65,5 +65,6 @@ try {
         <?php endif; ?>
 
     </main>
+    <script src="script.js"></script>
 </body>
 </html>

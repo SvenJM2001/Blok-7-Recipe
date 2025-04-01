@@ -170,5 +170,6 @@ if (isset($_SESSION['bezoeker_id'])) {  // Verander user_id naar bezoeker_id
             </div>
         </div>
     </main>
+    <script src="script.js"></script>
 </body>
 </html>

@@ -94,5 +94,6 @@ foreach ($ingredienten as $ingredient) {
             <button type="submit">Toevoegen</button>
         </form>
     </main>
+    <script src="script.js"></script>
 </body>
 </html>

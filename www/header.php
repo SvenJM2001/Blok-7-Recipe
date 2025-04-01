@@ -61,6 +61,13 @@ if (isset($_SESSION['gebruikersnaam'])) {
                     <ul class="dropdown-content">
                         <li><a href="bezoeker_detail.php">Mijn gegevens</a></li>
                         <li><a href="favorieten_index.php">Favorieten</a></li>
+                        <li>
+                            <div class="font-size-buttons">
+                                <button id="small-text">Klein</button>
+                                <button id="medium-text">Middel</button>
+                                <button id="large-text">Groot</button>
+                            </div>
+                        </li>
                         <?php
                         if (isset($_SESSION['gebruikersnaam'])) {
                         ?>
@@ -77,4 +84,6 @@ if (isset($_SESSION['gebruikersnaam'])) {
             </ul>
         </div>
     </nav>
+    <script src="path/to/script.js"></script>
 </header>
+

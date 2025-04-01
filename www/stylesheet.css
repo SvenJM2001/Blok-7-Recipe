@@ -37,6 +37,7 @@ header {
     gap: 20px;
     list-style-type: none;
     padding: 0;
+    align-items: center;
 }
 
 .nav-links a {
@@ -55,7 +56,6 @@ header {
 /* Dropdown-stijlen */
 .dropdown {
     position: relative;
-    align-content: center;
 }
 
 .dropdown_button {
@@ -82,6 +82,10 @@ header {
     display: block;
 }
 
+.dropdown-content li {
+    text-decoration: none;
+}
+
 .dropdown-content a {
     color: white;
     padding: 12px 16px;
@@ -93,18 +97,14 @@ header {
     background-color: #555;
 }
 
-/* Stijlen voor de login en uitlogknoppen */
-#login_button {
-    background-color: #4CAF50;
+.dropdown-content button {
     color: white;
-    border: none;
-    padding: 10px 15px;
-    cursor: pointer;
-    border-radius: 4px;
+    text-decoration: none;
+    display: block;
 }
 
-#login_button:hover {
-    background-color: #45a049;
+.dropdown-content button:hover {
+    background-color: #555;
 }
 
 /* Algemene stijlen */
@@ -113,6 +113,19 @@ body {
     background-color: #f4f4f9;
     margin: 0;
     padding: 0;
+}
+
+/* Stijlen voor verschillende lettergroottes */
+body.font-small {
+    font-size: 12px;
+}
+
+body.font-medium {
+    font-size: 16px;
+}
+
+body.font-large {
+    font-size: 20px;
 }
 
 /* Algemene stijlen voor de recepten index pagina */
@@ -211,12 +224,6 @@ td a:active {
     border-color: #0056b3;
 }
 
-.container {
-    width: 80%;
-    margin: 0 auto;
-    padding: 20px;
-}
-
 /* Hero Sectie */
 .hero {
     text-align: center;
@@ -284,7 +291,7 @@ td a:active {
 /* Algemene stijl voor de receptkaarten */
 .recipe-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* Dynamisch aantal kolommen */
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); 
     gap: 20px;
     margin-top: 20px;
 }
@@ -305,8 +312,6 @@ td a:active {
     object-fit: cover;
     margin-bottom: 10px;
 }
-
-/* Recepten Grid */
 
 .recipe-title {
     font-size: 24px;
@@ -376,6 +381,10 @@ td a:active {
     margin-top: 20px;
 }
 
+.recipe-detail h1, .recipe-detail p, .recipe-detail ul {
+    font-size: inherit;
+}
+
 /* Titel van het recept */
 .recipe-detail h1 {
     font-size: 32px;
@@ -402,7 +411,6 @@ td a:active {
 }
 
 .recipe-meta p {
-    font-size: 16px;
     margin: 5px 0;
 }
 
@@ -415,7 +423,6 @@ td a:active {
 }
 
 .recipe-detail p {
-    font-size: 16px;
     color: #555;
     line-height: 1.6;
 }
@@ -427,7 +434,6 @@ td a:active {
 }
 
 .recipe-detail ul li {
-    font-size: 16px;
     margin: 5px 0;
     color: #555;
 }
@@ -484,50 +490,6 @@ td a:active {
 }
 
 /* Stijlen voor de review pagina */
-.review-form {
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    max-width: 600px;
-    margin: 0 auto;
-}
-
-.review-form h1 {
-    font-size: 24px;
-    margin-bottom: 20px;
-}
-
-.review-form .form-group {
-    margin-bottom: 15px;
-}
-
-.review-form label {
-    font-weight: bold;
-}
-
-.review-form select,
-.review-form textarea {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-}
-
-.review-form button {
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    padding: 10px 15px;
-    cursor: pointer;
-    border-radius: 4px;
-}
-
-.review-form button:hover {
-    background-color: #45a049;
-}
-
-/* Algemene stijlen voor de review sectie */
 .reviews-section {
     background-color: #fff;
     padding: 20px;
@@ -581,7 +543,6 @@ td a:active {
 
 .review-rating span {
     margin-right: 5px;
-    font-size: 16px;
     color: #f39c12;
 }
 
@@ -590,151 +551,70 @@ td a:active {
 }
 
 .review p {
-    font-size: 16px;
     color: #555;
     line-height: 1.6;
     margin-top: 10px;
 }
 
-/* Stijl voor de beoordelingsterren */
-.star {
-    color: #f39c12;
-}
-
-.star-half {
-    color: #f39c12;
-}
-
-.star-empty {
-    color: #ccc;
-}
-
-/* Algemene stijl voor de receptkaarten */
-.recipe-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* Dynamisch aantal kolommen */
-    gap: 20px;
-    margin-top: 20px;
-}
-
-.recipe-card {
-    background-color: #f9f9f9;
-    border: 1px solid #ddd;
-    padding: 15px;
-    border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    text-align: center;
-}
-
-.recipe-image {
-    width: 100%;
-    height: auto;
-    border-radius: 8px;
-    object-fit: cover;
-    margin-bottom: 10px;
-}
-
-.recipe-card h3 {
-    font-size: 1.2rem;
-    font-weight: bold;
-    margin-top: 10px;
-}
-
-.favorite-collection h2 {
-    font-size: 1.5rem;
-    font-weight: bold;
-    margin-bottom: 10px;
-}
-
-.filter-form {
-    display: flex;
-    gap: 10px;
-    margin-bottom: 20px;
-}
-
-.filter-input {
-    padding: 8px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    width: 200px;
-}
-
-
-.favorite-collection {
-    margin-bottom: 30px;
-}
-
-/* Login pagina styling */
-.login-container {
-    max-width: 400px;
-    margin: 50px auto;
-    padding: 20px;
+.review-form {
     background-color: #fff;
+    padding: 20px;
     border-radius: 8px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    text-align: center;
+    max-width: 600px;
+    margin: 0 auto;
 }
 
-.login-container h2 {
+.review-form h1 {
     font-size: 24px;
     margin-bottom: 20px;
-    color: #333;
 }
 
-.form-group {
+.review-form .form-group {
     margin-bottom: 15px;
-    text-align: left;
 }
 
-.form-group label {
-    display: block;
+.review-form label {
     font-weight: bold;
-    margin-bottom: 5px;
 }
 
-.form-group input {
-    width: 94.5%;
+.review-form select,
+.review-form textarea {
+    width: 100%;
     padding: 10px;
+    font-size: 16px;
+    margin-top: 10px;
     border: 1px solid #ddd;
-    border-radius: 5px;
+    border-radius: 4px;
 }
 
-.btn {
+.review-form button {
+    padding: 12px 20px;
+    font-size: 16px;
     background-color: #4CAF50;
     color: white;
     border: none;
-    padding: 10px 15px;
-    cursor: pointer;
     border-radius: 4px;
-    width: 100%;
-    font-size: 16px;
+    cursor: pointer;
 }
 
-.btn:hover {
+.review-form button:hover {
     background-color: #45a049;
 }
 
-p {
-    margin-top: 15px;
-    font-size: 14px;
-    color: #666;
-}
-
-p a {
-    color: #4CAF50;
-    text-decoration: none;
-}
-
-p a:hover {
-    text-decoration: underline;
-}
-
-
-/* Responsive stijlen */
+/* Mediaselectie */
 @media (max-width: 768px) {
     .navbar {
         flex-direction: column;
-        align-items: flex-start;
+    }
+
+    .navbar-content {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .logo a {
+        font-size: 20px;
     }
 
     .nav-links {
@@ -742,55 +622,11 @@ p a:hover {
         gap: 10px;
     }
 
-    .logo a {
-        font-size: 20px;
-        padding: 0;
-    }
-
-    .dropdown-content {
-        right: unset;
-    }
-    
-    .recept_search {
+    .recipe-card {
         padding: 15px;
     }
 
-    .recept_search input,
-    .recept_search select,
-    .recept_search button {
-        max-width: 100%;
-    }
-
-    table {
-        font-size: 14px;
-    }
-
-    td img {
-        max-width: 80px;
-    }
-    .recipe-detail {
-        padding: 20px;
-    }
-
-    .recipe-detail h1 {
-        font-size: 28px;
-    }
-
-    .recipe-detail h2 {
-        font-size: 20px;
-    }
-
-    .recipe-meta {
-        padding: 15px;
-    }
-
-    .recipe-actions {
-        flex-direction: column;
-        gap: 15px;
-    }
-
-    .favorite-btn, .review-btn {
-        width: 100%;
-        text-align: center;
+    .recipe-grid {
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
     }
 }

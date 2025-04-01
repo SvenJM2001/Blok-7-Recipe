@@ -56,5 +56,6 @@ if (!$recept) {
             </form>
         </div>
     </main>
+    <script src="script.js"></script>
 </body>
 </html>
