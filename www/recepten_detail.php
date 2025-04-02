@@ -23,9 +23,11 @@ if (!$recept) {
 }
 
 // Haal ingrediënten op
-$sql = "SELECT i.naam FROM recepten_ingredienten ri
+$sql = "SELECT i.naam, ri.hoeveelheid, ri.eenheid 
+        FROM recepten_ingredienten ri
         JOIN ingredienten i ON ri.ingredient_id = i.ingredient_id
         WHERE ri.recept_code = :recept_code";
+
 
 $stmt = $conn->prepare($sql);
 $stmt->execute([':recept_code' => $recept_code]);
@@ -83,41 +85,50 @@ if (isset($_SESSION['bezoeker_id'])) {  // Verander user_id naar bezoeker_id
     <main class="container">
         <div class="recipe-detail">
             <h1><?php echo htmlspecialchars($recept['naam']); ?></h1>
-            <img src="./uploads/<?php echo htmlspecialchars($recept['afbeelding']); ?>" alt="<?php echo htmlspecialchars($recept['naam']); ?>" class="recipe-img">
+            <div class="recipe-img">
+                <img src="./uploads/<?php echo htmlspecialchars($recept['afbeelding']); ?>" alt="<?php echo htmlspecialchars($recept['naam']); ?>" class="recipe-img">
+            </div>
             
             <div class="recipe-meta">
                 <p><strong>Maaltijdtype:</strong> <?php echo htmlspecialchars($recept['maaltijdtype']); ?></p>
                 <p><strong>Moeilijkheidsgraad:</strong> <?php echo htmlspecialchars($recept['moeilijkheidsgraad']); ?></p>
                 <p><strong>Bereidingstijd:</strong> <?php echo htmlspecialchars($recept['bereidingstijd']); ?> minuten</p>
             </div>
-
-            <h2>Beschrijving</h2>
-            <p><?php echo nl2br(htmlspecialchars($recept['beschrijving'])); ?></p>
-
-            <h2>Ingrediënten</h2>
-            <ul>
-                <?php foreach ($ingredienten as $ingredient): ?>
-                    <li><?php echo htmlspecialchars($ingredient['naam']); ?></li>
-                <?php endforeach; ?>
-            </ul>
-
-            <h2>Stappenplan</h2>
-            <p><?php echo nl2br(htmlspecialchars($recept['stappenplan'])); ?></p>
-
-            <h2>Gemiddelde Beoordeling</h2>
-            <div class="rating">
-                <?php
-                $fullStars = floor($rating);
-                $halfStar = ($rating - $fullStars >= 0.5) ? 1 : 0;
-                $emptyStars = 5 - ($fullStars + $halfStar);
-                
-                for ($i = 0; $i < $fullStars; $i++) echo '<span class="star">⭐</span>';;
-                if ($halfStar) echo '<span class="star-half">⭐½</span>';
-                for ($i = 0; $i < $emptyStars; $i++) echo '<span class="star-empty">☆</span>';
-                ?>
-                <span>(<?php echo $rating; ?> / 5)</span>
+            <div class="recipe-beschrijving">
+                <h2>Beschrijving</h2>
+                <p><?php echo nl2br(htmlspecialchars($recept['beschrijving'])); ?></p>
             </div>
 
+            <div class="recipe-ingredients">
+                <h2>Ingrediënten</h2>
+                <ul>
+                    <?php foreach ($ingredienten as $ingredient): ?>
+                        <li>
+                            <?php echo htmlspecialchars($ingredient['hoeveelheid']) . ' ' . htmlspecialchars($ingredient['eenheid']) . ' ' . htmlspecialchars($ingredient['naam']); ?>
+                        </li>
+                    <?php endforeach; ?>
+                </ul>
+            </div>
+            <div class="recipe-steps">
+                <h2>Stappenplan</h2>
+                <p><?php echo nl2br(htmlspecialchars($recept['stappenplan'])); ?></p>
+            </div>
+            
+            <div class="recipe-rating">
+                <h2>Gemiddelde Beoordeling</h2>
+                <div class="rating">
+                    <?php
+                    $fullStars = floor($rating);
+                    $halfStar = ($rating - $fullStars >= 0.5) ? 1 : 0;
+                    $emptyStars = 5 - ($fullStars + $halfStar);
+                    
+                    for ($i = 0; $i < $fullStars; $i++) echo '<span class="star">⭐</span>';;
+                    if ($halfStar) echo '<span class="star-half">⭐½</span>';
+                    for ($i = 0; $i < $emptyStars; $i++) echo '<span class="star-empty">☆</span>';
+                    ?>
+                    <span>(<?php echo $rating; ?> / 5)</span>
+                </div>
+            </div>
             <div class="recipe-actions">
                 <?php if (isset($_SESSION['bezoeker_id'])): ?>
                     <form method="POST" action="favorieten_toggle.php">
@@ -129,6 +140,8 @@ if (isset($_SESSION['bezoeker_id'])) {  // Verander user_id naar bezoeker_id
                 <?php else: ?>
                     <p>Log in om dit recept aan je favorieten toe te voegen.</p>
                 <?php endif; ?>
+
+                <button onclick="printRecept()" class="print-btn">🖨️ Print Recept</button>
 
                 <a href="review_add.php?id=<?php echo $recept_code; ?>" class="review-btn">Schrijf een review</a>
             </div>

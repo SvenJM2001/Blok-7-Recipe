@@ -1,3 +1,30 @@
+function printRecept() {
+    window.print();
+}
+
+function toggleInputFields(ingredient) {
+    var checkbox = document.getElementById('ingredient_' + ingredient);
+    var fields = document.getElementById('fields_' + ingredient);
+    if (checkbox.checked) {
+        fields.style.display = 'block';
+    } else {
+        fields.style.display = 'none';
+    }
+}
+
+function toggleIngredientFields(ingredient) {
+    console.log ("werkt");
+    let extraFields = document.getElementById("extraFields_" + ingredient);
+    let checkbox = document.getElementById("ingredient_" + ingredient);
+
+    if (checkbox.checked) {
+        extraFields.style.display = "block";
+    } else {
+        extraFields.style.display = "none";
+    }
+}
+
+
 document.addEventListener('DOMContentLoaded', function() {
     // Verkrijg de knoppen
     const smallBtn = document.getElementById('small-text');

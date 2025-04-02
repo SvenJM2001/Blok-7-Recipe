@@ -28,18 +28,31 @@ $stmt = $conn->prepare($sql);
 $stmt->execute();
 $types = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-// Verkrijg de huidige ingrediënten voor dit recept
-$sql = "SELECT i.naam 
+// Verkrijg alle ingrediënten en hun types
+$sql = "SELECT i.ingredient_id, i.naam, i.type_id, t.type 
         FROM ingredienten i
-        JOIN recepten_ingredienten ri ON i.ingredient_id = ri.ingredient_id
+        LEFT JOIN ingredienttypes t ON i.type_id = t.type_id
+        ORDER BY t.type, i.naam";
+$stmt = $conn->prepare($sql);
+$stmt->execute();
+$alleIngredienten = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+// Verkrijg de ingrediënten die al in het recept zitten met hoeveelheid en eenheid
+$sql = "SELECT i.ingredient_id, i.naam, ri.hoeveelheid, ri.eenheid 
+        FROM recepten_ingredienten ri
+        JOIN ingredienten i ON ri.ingredient_id = i.ingredient_id
         WHERE ri.recept_code = :recept_code";
 $stmt = $conn->prepare($sql);
 $stmt->bindParam(':recept_code', $receptCode, PDO::PARAM_INT);
 $stmt->execute();
-$huidigeIngrediënten = $stmt->fetchAll(PDO::FETCH_ASSOC);
-$huidigeIngredientenArray = array_map(function($ingredient) {
-    return $ingredient['naam'];
-}, $huidigeIngrediënten);
+$geselecteerdeIngredienten = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+// Zet de geselecteerde ingrediënten in een array voor snelle lookup
+$geselecteerdeIngredientenArray = [];
+foreach ($geselecteerdeIngredienten as $ing) {
+    $geselecteerdeIngredientenArray[$ing['ingredient_id']] = $ing;
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -91,22 +104,60 @@ $huidigeIngredientenArray = array_map(function($ingredient) {
 
                 <div>
                     <fieldset>
-                        <legend>Ingrediënten</legend>
-                        <?php
-                        // Verkrijg alle ingrediënten
-                        $sql = "SELECT naam FROM ingredienten ORDER BY naam";
-                        $stmt = $conn->prepare($sql);
-                        $stmt->execute();
-                        $ingredienten = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                        <legend class="text-xl font-bold">Ingrediënten</legend>
 
-                        foreach ($ingredienten as $ingredient):
-                            $checked = in_array($ingredient['naam'], $huidigeIngredientenArray) ? 'checked' : '';
+                        <?php 
+                        $huidigType = null;
+                        foreach ($alleIngredienten as $ingredient): 
+                            // Start een nieuwe sectie als het ingredienttype verandert
+                            if ($huidigType !== $ingredient['type']) {
+                                if ($huidigType !== null) {
+                                    echo "</div>"; // Sluit vorige groep af
+                                }
+                                echo "<div class='mt-4'><h3 class='font-semibold text-lg'>{$ingredient['type']}</h3>";
+                                $huidigType = $ingredient['type'];
+                            }
+
+                            $ingredientID = $ingredient['ingredient_id'];
+                            $checked = isset($geselecteerdeIngredientenArray[$ingredientID]) ? 'checked' : '';
+                            $hoeveelheid = $checked ? $geselecteerdeIngredientenArray[$ingredientID]['hoeveelheid'] : '';
+                            $eenheid = $checked ? $geselecteerdeIngredientenArray[$ingredientID]['eenheid'] : '';
                         ?>
-                            <input type="checkbox" id="<?php echo $ingredient['naam']; ?>" name="ingredienten[]" value="<?php echo $ingredient['naam']; ?>" <?php echo $checked; ?>>
-                            <label for="<?php echo $ingredient['naam']; ?>"><?php echo ucfirst($ingredient['naam']); ?></label><br>
+
+                            <div class="ml-4">
+                                <input type="checkbox" 
+                                    id="ingredient_<?php echo $ingredientID; ?>" 
+                                    name="ingredienten[]" 
+                                    value="<?php echo $ingredientID; ?>" 
+                                    <?php echo $checked; ?> 
+                                    onchange="toggleInputFields('<?php echo $ingredientID; ?>')">
+                                <label for="ingredient_<?php echo $ingredientID; ?>"><?php echo ucfirst($ingredient['naam']); ?></label>
+                                
+                                <div id="fields_<?php echo $ingredientID; ?>" style="display: <?php echo $checked ? 'block' : 'none'; ?>;">
+                                    <input type="number" name="hoeveelheid[<?php echo $ingredientID; ?>]" value="<?php echo $hoeveelheid; ?>" class="ml-2 p-1 border border-gray-300 rounded" placeholder="Hoeveelheid" step="any">
+                                    <select name="eenheid[<?php echo $ingredientID; ?>]" class="ml-2 p-1 border border-gray-300 rounded">
+                                        <option value="gram" <?php echo ($eenheid == 'gram') ? 'selected' : ''; ?>>gram</option>
+                                        <option value="ml" <?php echo ($eenheid == 'ml') ? 'selected' : ''; ?>>ml</option>
+                                        <option value="stuk" <?php echo ($eenheid == 'stuk') ? 'selected' : ''; ?>>stuk</option>
+                                        <option value="theelepel" <?php echo ($eenheid == 'theelepel') ? 'selected' : ''; ?>>theelepel</option>
+                                        <option value="eetlepel" <?php echo ($eenheid == 'eetlepel') ? 'selected' : ''; ?>>eetlepel</option>
+                                        <option value="teen" <?php echo ($eenheid == 'teen') ? 'selected' : ''; ?>>teen</option>
+                                        <option value="tenen" <?php echo ($eenheid == 'tenen') ? 'selected' : ''; ?>>tenen</option>
+                                        <option value="blokje" <?php echo ($eenheid == 'blokje') ? 'selected' : ''; ?>>blokje</option>
+                                        <option value="blokjes" <?php echo ($eenheid == 'blokjes') ? 'selected' : ''; ?>>blokjes</option>
+                                        <option value="bol" <?php echo ($eenheid == 'bol') ? 'selected' : ''; ?>>bol</option>
+                                        <option value="bollen" <?php echo ($eenheid == 'bollen') ? 'selected' : ''; ?>>bollen</option>
+                                        <option value="snufje" <?php echo ($eenheid == 'snufje') ? 'selected' : ''; ?>>snufje</option>
+                                        <option value="handje" <?php echo ($eenheid == 'handje') ? 'selected' : ''; ?>>handje</option>
+                                    </select>
+                                </div>
+                            </div>
+
                         <?php endforeach; ?>
+                        </div> <!-- Sluit laatste groep af -->
                     </fieldset>
                 </div>
+
                 <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">Opslaan</button>
             </form>
         </div>

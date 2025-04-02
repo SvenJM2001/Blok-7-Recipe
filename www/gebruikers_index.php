@@ -33,7 +33,7 @@ $gebruikers = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <link rel="stylesheet" href="stylesheet.css">
 </head>
 <body>
-    <?php require 'header.php'; ?>
+    <?php 'header.php'; ?>
     <main>
         <div>
             <form class="gebruikers_search" method="GET" action="gebruikers_index.php">

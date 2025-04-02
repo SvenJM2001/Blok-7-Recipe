@@ -56,12 +56,38 @@ foreach ($ingredienten as $ingredient) {
                 <fieldset>
                     <legend>Ingrediënten</legend>
                     <?php foreach ($ingredientenPerType as $ingredientType => $ingredientenLijst): ?>
-                        <h3><?php echo ucfirst($ingredientType); ?></h3> <!-- Type als kopje -->
+                        <h3><?php echo ucfirst($ingredientType); ?></h3>
                         <?php foreach ($ingredientenLijst as $ingredient): ?>
-                            <input type="checkbox" id="<?php echo $ingredient; ?>" 
-                                name="ingredienten[]" 
-                                value="<?php echo $ingredient; ?>">
-                            <label for="<?php echo $ingredient; ?>"><?php echo ucfirst($ingredient); ?></label><br>
+                            <div>
+                                <input type="checkbox" 
+                                    id="ingredient_<?php echo $ingredient; ?>" 
+                                    name="ingredienten[]" 
+                                    value="<?php echo $ingredient; ?>"
+                                    onchange="toggleIngredientFields('<?php echo $ingredient; ?>')">
+                                <label for="ingredient_<?php echo $ingredient; ?>"><?php echo ucfirst($ingredient); ?></label>
+                                
+                                <div id="extraFields_<?php echo $ingredient; ?>" style="display: none; margin-left: 20px;">
+                                    <label for="hoeveelheid_<?php echo $ingredient; ?>">Hoeveelheid:</label>
+                                    <input type="number" name="hoeveelheid[<?php echo $ingredient; ?>]" id="hoeveelheid_<?php echo $ingredient; ?>" min="0" step="0.1">
+                                    
+                                    <label for="eenheid_<?php echo $ingredient; ?>">Eenheid:</label>
+                                    <select name="eenheid[<?php echo $ingredient; ?>]" id="eenheid_<?php echo $ingredient; ?>">
+                                        <option value="gram">gram</option>
+                                        <option value="ml">ml</option>
+                                        <option value="stuk">stuk</option>
+                                        <option value="theelepel">theelepel</option>
+                                        <option value="eetlepel">eetlepel</option>
+                                        <option value="teen">teen</option>
+                                        <option value="tenen">tenen</option>
+                                        <option value="blokje">blokje</option>
+                                        <option value="blokjes">blokjes</option>
+                                        <option value="bol">bol</option>
+                                        <option value="bollen">bollen</option>
+                                        <option value="snufje">snufje</option>
+                                        <option value="handje">handje</option>
+                                    </select>
+                                </div>
+                            </div>
                         <?php endforeach; ?>
                     <?php endforeach; ?>
                 </fieldset>

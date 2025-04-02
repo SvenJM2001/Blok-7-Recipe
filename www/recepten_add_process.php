@@ -56,19 +56,22 @@ try {
 
     // **Stap 6: Ingrediënten koppelen (indien geselecteerd)**
     if (!empty($_POST['ingredienten'])) {
-        $sql = "INSERT INTO recepten_ingredienten (recept_code, ingredient_id) VALUES (:recept_code, :ingredient_id)";
+        $sql = "INSERT INTO recepten_ingredienten (recept_code, ingredient_id, hoeveelheid, eenheid) 
+                VALUES (:recept_code, :ingredient_id, :hoeveelheid, :eenheid)";
         $stmt = $conn->prepare($sql);
-
+    
         foreach ($_POST['ingredienten'] as $ingredient_naam) {
             // Haal het ingredient_id op
             $stmtIng = $conn->prepare("SELECT ingredient_id FROM ingredienten WHERE naam = :naam");
             $stmtIng->execute([':naam' => $ingredient_naam]);
             $ingredient = $stmtIng->fetch(PDO::FETCH_ASSOC);
-
+    
             if ($ingredient) {
                 $stmt->execute([
                     ':recept_code' => $recept_code,
-                    ':ingredient_id' => $ingredient['ingredient_id']
+                    ':ingredient_id' => $ingredient['ingredient_id'],
+                    ':hoeveelheid' => $_POST['hoeveelheid'][$ingredient_naam] ?? 0,
+                    ':eenheid' => $_POST['eenheid'][$ingredient_naam] ?? 'stuk'
                 ]);
             }
         }

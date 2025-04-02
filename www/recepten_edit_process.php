@@ -18,6 +18,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $type_id = $_POST['type_id'];
     $stappenplan = $_POST['stappenplan'];
     $ingredienten = isset($_POST['ingredienten']) ? $_POST['ingredienten'] : [];
+    $hoeveelheid = isset($_POST['hoeveelheid']) ? $_POST['hoeveelheid'] : [];
+    $eenheid = isset($_POST['eenheid']) ? $_POST['eenheid'] : [];
 
     try {
         // Start de transactie
@@ -42,7 +44,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         // Voeg de nieuwe geselecteerde ingrediënten toe
         if (!empty($ingredienten)) {
-            $sql = "INSERT INTO recepten_ingredienten (recept_code, ingredient_id) VALUES (:recept_code, :ingredient_id)";
+            $sql = "INSERT INTO recepten_ingredienten (recept_code, ingredient_id, hoeveelheid, eenheid) 
+                    VALUES (:recept_code, :ingredient_id, :hoeveelheid, :eenheid)";
             $stmt = $conn->prepare($sql);
 
             foreach ($ingredienten as $ingredient_naam) {
@@ -53,7 +56,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 if ($ingredient) {
                     $stmt->execute([
                         ':recept_code' => $receptCode,
-                        ':ingredient_id' => $ingredient['ingredient_id']
+                        ':ingredient_id' => $ingredient['ingredient_id'],
+                        ':hoeveelheid' => $hoeveelheid[$ingredient_naam],
+                        ':eenheid' => $eenheid[$ingredient_naam]
                     ]);
                 }
             }
