@@ -22,6 +22,8 @@ if (!$recept) {
     die("Recept niet gevonden.");
 }
 
+$standaardAantalPersonen = $recept['aantal'];
+
 // Haal ingrediënten op
 $sql = "SELECT i.naam, ri.hoeveelheid, ri.eenheid 
         FROM recepten_ingredienten ri
@@ -99,12 +101,18 @@ if (isset($_SESSION['bezoeker_id'])) {  // Verander user_id naar bezoeker_id
                 <p><?php echo nl2br(htmlspecialchars($recept['beschrijving'])); ?></p>
             </div>
 
+            <div class="recipe-serving">
+                <label for="aantalPersonen">Aantal personen:</label>
+                <input type="number" id="aantalPersonen" value="<?php echo $standaardAantalPersonen; ?>" min="1" class="p-2 border border-gray-300 rounded w-20">
+            </div>
+
             <div class="recipe-ingredients">
                 <h2>Ingrediënten</h2>
-                <ul>
+                <ul id="ingredientenLijst">
                     <?php foreach ($ingredienten as $ingredient): ?>
-                        <li>
-                            <?php echo htmlspecialchars($ingredient['hoeveelheid']) . ' ' . htmlspecialchars($ingredient['eenheid']) . ' ' . htmlspecialchars($ingredient['naam']); ?>
+                        <li data-base-hoeveelheid="<?php echo htmlspecialchars($ingredient['hoeveelheid'] / $standaardAantalPersonen); ?>">
+                            <span class="hoeveelheid"><?php echo htmlspecialchars($ingredient['hoeveelheid']); ?></span> 
+                            <?php echo htmlspecialchars($ingredient['eenheid']) . ' ' . htmlspecialchars($ingredient['naam']); ?>
                         </li>
                     <?php endforeach; ?>
                 </ul>

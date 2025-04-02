@@ -24,6 +24,16 @@ function toggleIngredientFields(ingredient) {
     }
 }
 
+document.getElementById("aantalPersonen").addEventListener("input", function () {
+    let aantal = this.value;
+    let ingredientenLijst = document.querySelectorAll("#ingredientenLijst li");
+
+    ingredientenLijst.forEach(function (item) {
+        let baseHoeveelheid = parseFloat(item.getAttribute("data-base-hoeveelheid"));
+        let nieuweHoeveelheid = baseHoeveelheid * aantal;
+        item.querySelector(".hoeveelheid").textContent = nieuweHoeveelheid.toFixed(2);
+    });
+});
 
 document.addEventListener('DOMContentLoaded', function() {
     // Verkrijg de knoppen
