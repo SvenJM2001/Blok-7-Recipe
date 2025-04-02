@@ -34,44 +34,50 @@ foreach ($ingredienten as $ingredient) {
 </head>
 <body>
     <?php include 'header.php';?>
-    <main>
-        <form action="recepten_add_process.php" method="post" enctype="multipart/form-data">
-            <div>
+    <main class="container">
+        <form action="recepten_add_process.php" method="post" enctype="multipart/form-data" class="form-recept">
+            <div class="form-group">
                 <label for="naam">Naam:</label>
-                <input type="text" name="naam" id="naam">
+                <input type="text" name="naam" id="naam" class="form-input">
             </div>
-            <div>
+            <div class="form-group">
                 <label for="type">Type:</label>
-                <select name="type" id="type">
-                <?php foreach ($types as $type): ?>
-                    <option value="<?php echo $type['type']; ?>" <?php echo isset($_GET['type']) && $_GET['type'] == $type['type'] ? 'selected' : ''; ?>>
-                        <?php echo ucfirst($type['type']); ?>
-                    </option>
-                <?php endforeach; ?>
+                <select name="type" id="type" class="form-select">
+                    <?php foreach ($types as $type): ?>
+                        <option value="<?php echo $type['type']; ?>" <?php echo isset($_GET['type']) && $_GET['type'] == $type['type'] ? 'selected' : ''; ?>>
+                            <?php echo ucfirst($type['type']); ?>
+                        </option>
+                    <?php endforeach; ?>
                 </select>
+            </div>
+            <div class="form-group">
+                <label for="aantal">Aantal personen:</label>
+                <input type="number" name="aantal" id="aantal" class="form-input">
             </div>
             
             <!-- Ingrediënten sectie gesorteerd per type -->
-            <div>
-                <fieldset>
+            <div class="form-group">
+                <fieldset class="fieldset-ingredients">
                     <legend>Ingrediënten</legend>
                     <?php foreach ($ingredientenPerType as $ingredientType => $ingredientenLijst): ?>
-                        <h3><?php echo ucfirst($ingredientType); ?></h3>
+                        <h3 class="ingredient-type"><?php echo ucfirst($ingredientType); ?></h3>
+                        <div class="ingredient-items">
                         <?php foreach ($ingredientenLijst as $ingredient): ?>
-                            <div>
+                            <div class="ingredient-item">
                                 <input type="checkbox" 
                                     id="ingredient_<?php echo $ingredient; ?>" 
                                     name="ingredienten[]" 
                                     value="<?php echo $ingredient; ?>"
+                                    class="ingredient-checkbox"
                                     onchange="toggleIngredientFields('<?php echo $ingredient; ?>')">
-                                <label for="ingredient_<?php echo $ingredient; ?>"><?php echo ucfirst($ingredient); ?></label>
+                                <label for="ingredient_<?php echo $ingredient; ?>"><?php echo ucfirst($ingredient); ?></label> <br>
                                 
-                                <div id="extraFields_<?php echo $ingredient; ?>" style="display: none; margin-left: 20px;">
+                                <div id="extraFields_<?php echo $ingredient; ?>" class="extra-ingredient-fields" style="display: none;">
                                     <label for="hoeveelheid_<?php echo $ingredient; ?>">Hoeveelheid:</label>
-                                    <input type="number" name="hoeveelheid[<?php echo $ingredient; ?>]" id="hoeveelheid_<?php echo $ingredient; ?>" min="0" step="0.1">
+                                    <input type="number" name="hoeveelheid[<?php echo $ingredient; ?>]" id="hoeveelheid_<?php echo $ingredient; ?>" class="ingredient-quantity" min="0" step="0.1">
                                     
                                     <label for="eenheid_<?php echo $ingredient; ?>">Eenheid:</label>
-                                    <select name="eenheid[<?php echo $ingredient; ?>]" id="eenheid_<?php echo $ingredient; ?>">
+                                    <select name="eenheid[<?php echo $ingredient; ?>]" id="eenheid_<?php echo $ingredient; ?>" class="ingredient-unit">
                                         <option value="gram">gram</option>
                                         <option value="ml">ml</option>
                                         <option value="stuk">stuk</option>
@@ -85,39 +91,44 @@ foreach ($ingredienten as $ingredient) {
                                         <option value="bollen">bollen</option>
                                         <option value="snufje">snufje</option>
                                         <option value="handje">handje</option>
+                                        <option value="plakje">plakje</option>
+                                        <option value="plakjes">plakjes</option>
+                                        <option value="klontje">klontje</option>
+                                        <option value="klontjes">klontjes</option>
                                     </select>
                                 </div>
                             </div>
                         <?php endforeach; ?>
+                        </div>
                     <?php endforeach; ?>
                 </fieldset>
             </div>
             
-            <div>
+            <div class="form-group">
                 <label for="beschrijving">Beschrijving:</label>
-                <input type="text" name="beschrijving" id="beschrijving">
+                <input type="text" name="beschrijving" id="beschrijving" class="form-input">
             </div>
-            <div>
+            <div class="form-group">
                 <label for="stappenplan">Stappenplan:</label>
-                <input type="text" name="stappenplan" id="stappenplan">
+                <input type="text" name="stappenplan" id="stappenplan" class="form-input">
             </div>
-            <div>
+            <div class="form-group">
                 <label for="tijd">Tijdsduur:</label>
-                <input type="time" name="tijd" id="tijd">
+                <input type="time" name="tijd" id="tijd" class="form-input">
             </div>
-            <div>
+            <div class="form-group">
                 <label for="graad">Moeilijkheidsgraad:</label>
-                <select name="graad" id="graad">
+                <select name="graad" id="graad" class="form-select">
                     <option value="Makkelijk">Makkelijk</option>
                     <option value="Gemiddeld">Gemiddeld</option>
                     <option value="Moeilijk">Moeilijk</option>
                 </select>
             </div>
-            <div>
+            <div class="form-group">
                 <label for="image">Afbeelding:</label>
-                <input type="file" name="image" id="image">
+                <input type="file" name="image" id="image" class="form-input">
             </div>
-            <button type="submit">Toevoegen</button>
+            <button type="submit" class="form-button">Toevoegen</button>
         </form>
     </main>
     <script src="script.js"></script>

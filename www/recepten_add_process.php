@@ -12,7 +12,8 @@ try {
     $stappenplan = $_POST['stappenplan'];
     $tijd = $_POST['tijd'];
     $graad = $_POST['graad'];
-    $type = $_POST['type']; // Maaltijdtype naam
+    $type = $_POST['type'];
+    $aantal = $_POST['aantal'];
 
     // **Stap 1: Type-ID ophalen**
     $stmt = $conn->prepare("SELECT type_id FROM maaltijdtypes WHERE type = :type");
@@ -38,11 +39,12 @@ try {
     $conn->beginTransaction();
     
     // **Stap 4: Recept toevoegen**
-    $sql = "INSERT INTO recepten (naam, beschrijving, stappenplan, bereidingstijd, moeilijkheidsgraad, afbeelding, type_id) 
-            VALUES (:naam, :beschrijving, :stappenplan, :tijd, :graad, :afbeelding, :type_id)";
+    $sql = "INSERT INTO recepten (naam, aantal, beschrijving, stappenplan, bereidingstijd, moeilijkheidsgraad, afbeelding, type_id) 
+            VALUES (:naam, :aantal, :beschrijving, :stappenplan, :tijd, :graad, :afbeelding, :type_id)";
     $stmt = $conn->prepare($sql);
     $stmt->execute([
         ':naam' => $naam,
+        ':aantal' => $aantal,
         ':beschrijving' => $beschrijving,
         ':stappenplan' => $stappenplan,
         ':tijd' => $tijd,

@@ -149,8 +149,12 @@ foreach ($geselecteerdeIngredienten as $ing) {
                                         <option value="bollen" <?php echo ($eenheid == 'bollen') ? 'selected' : ''; ?>>bollen</option>
                                         <option value="snufje" <?php echo ($eenheid == 'snufje') ? 'selected' : ''; ?>>snufje</option>
                                         <option value="handje" <?php echo ($eenheid == 'handje') ? 'selected' : ''; ?>>handje</option>
+                                        <option value="plakje" <?php echo ($eenheid == 'plakje') ? 'selected' : ''; ?>>plakje</option>
+                                        <option value="plakjes" <?php echo ($eenheid == 'plakjes') ? 'selected' : ''; ?>>plakjes</option>
+                                        <option value="klontje" <?php echo ($eenheid == 'klontje') ? 'selected' : ''; ?>>klontje</option>
+                                        <option value="klontjes" <?php echo ($eenheid == 'klontjes') ? 'selected' : ''; ?>>klontjes</option>
                                     </select>
-                                </div>
+                                </div> 
                             </div>
 
                         <?php endforeach; ?>

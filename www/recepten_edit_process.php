@@ -36,31 +36,38 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $stmt->bindParam(':recept_code', $receptCode);
         $stmt->execute();
 
-        // Verwijder de oude ingrediënten
-        $sql = "DELETE FROM recepten_ingredienten WHERE recept_code = :recept_code";
-        $stmt = $conn->prepare($sql);
-        $stmt->bindParam(':recept_code', $receptCode);
-        $stmt->execute();
+        // Loop door de geselecteerde ingredienten
+        foreach ($ingredienten as $ingredient_id) {
+            // Kijk of het ingrediënt al gekoppeld is aan het recept
+            $stmtCheck = $conn->prepare("SELECT * FROM recepten_ingredienten WHERE recept_code = :recept_code AND ingredient_id = :ingredient_id");
+            $stmtCheck->execute([
+                ':recept_code' => $receptCode,
+                ':ingredient_id' => $ingredient_id
+            ]);
 
-        // Voeg de nieuwe geselecteerde ingrediënten toe
-        if (!empty($ingredienten)) {
-            $sql = "INSERT INTO recepten_ingredienten (recept_code, ingredient_id, hoeveelheid, eenheid) 
-                    VALUES (:recept_code, :ingredient_id, :hoeveelheid, :eenheid)";
-            $stmt = $conn->prepare($sql);
-
-            foreach ($ingredienten as $ingredient_naam) {
-                $stmtIng = $conn->prepare("SELECT ingredient_id FROM ingredienten WHERE naam = :naam");
-                $stmtIng->execute([':naam' => $ingredient_naam]);
-                $ingredient = $stmtIng->fetch(PDO::FETCH_ASSOC);
-
-                if ($ingredient) {
-                    $stmt->execute([
-                        ':recept_code' => $receptCode,
-                        ':ingredient_id' => $ingredient['ingredient_id'],
-                        ':hoeveelheid' => $hoeveelheid[$ingredient_naam],
-                        ':eenheid' => $eenheid[$ingredient_naam]
-                    ]);
-                }
+            if ($stmtCheck->rowCount() > 0) {
+                // Als het ingrediënt al bestaat, werk de hoeveelheid en eenheid bij
+                $sqlUpdate = "UPDATE recepten_ingredienten 
+                              SET hoeveelheid = :hoeveelheid, eenheid = :eenheid
+                              WHERE recept_code = :recept_code AND ingredient_id = :ingredient_id";
+                $stmtUpdate = $conn->prepare($sqlUpdate);
+                $stmtUpdate->execute([
+                    ':hoeveelheid' => $hoeveelheid[$ingredient_id],
+                    ':eenheid' => $eenheid[$ingredient_id],
+                    ':recept_code' => $receptCode,
+                    ':ingredient_id' => $ingredient_id
+                ]);
+            } else {
+                // Als het ingrediënt nog niet gekoppeld is, voeg het dan toe
+                $sqlInsert = "INSERT INTO recepten_ingredienten (recept_code, ingredient_id, hoeveelheid, eenheid) 
+                              VALUES (:recept_code, :ingredient_id, :hoeveelheid, :eenheid)";
+                $stmtInsert = $conn->prepare($sqlInsert);
+                $stmtInsert->execute([
+                    ':recept_code' => $receptCode,
+                    ':ingredient_id' => $ingredient_id,
+                    ':hoeveelheid' => $hoeveelheid[$ingredient_id],
+                    ':eenheid' => $eenheid[$ingredient_id]
+                ]);
             }
         }
 
